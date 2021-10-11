@@ -1,0 +1,53 @@
+<div class="row" style="margin-bottom: 20px;margin-top: 30px;">
+    <div class="col-sm-6"><h3>{{title}}</h3></div>
+    <div class="col-sm-6" style="display: flex; justify-content: end;"><button type="button" class="btn btn-primary" routerLink="/">Employees List</button></div>
+</div>
+
+
+<div>
+    <form [formGroup]="employeeForm">
+        <div class="form-group">
+            <label for="firstName">First Name</label>
+            <input type="text" id="firstName" class="form-control" formControlName="firstName" [(ngModel)]="employee==null?null:employee.firstName"/>
+            <span *ngIf="firstNameFormControl.touched && firstNameFormControl.hasError('required')" style="font-size: 10px; color: red;">
+                Enter the firstname
+            </span>
+        </div>
+        <div class="form-group">
+            <label for="lastName">Last Name</label>
+            <input type="text" id="lastName" class="form-control" formControlName="lastName" [(ngModel)]="employee==null?null:employee.lastName"/>
+            <span *ngIf="lastNameFormControl.touched && lastNameFormControl.hasError('required')" style="font-size: 10px; color: red;">
+                Enter the lastname
+            </span>
+        </div>
+        <div class="form-group">
+            <label for="dateOfBirth">Date of Birth</label>
+            <input type="date" id="dateOfBirth" class="form-control" formControlName="dateOfBirth" [(ngModel)]="employee==null?null:employee.dateOfBirth"/>
+            <span *ngIf="dateOfBirthFormControl.touched && dateOfBirthFormControl.hasError('required')" style="font-size: 10px; color: red;">
+                Enter the date of birth
+            </span>
+        </div>
+        <div class="form-group">
+            <label for="department">Department</label>
+            <select id="department" class="form-control" formControlName="department" [(ngModel)]="employee==null?null:employee.department.name">
+                <option *ngFor="let department of departments" id="{{department.id}}" [selected]="department.id === employee.department.id">{{department.name}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="designation">Designation</label>
+            <select id="designation" class="form-control" formControlName="designation" [(ngModel)]="employee==null?null:employee.designation.name">
+                <option *ngFor="let designation of designations" id="{{designation.id}}" [selected]="designation.id === employee.designation.id">{{designation.name}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="employmentType">Employment Type</label>
+            <select id="employmentType" class="form-control" formControlName="employmentType"  [(ngModel)]="employee==null?null:employee.employmentType.type">
+                <option *ngFor="let employmentType of employmentTypes" id="{{employmentType.id}}" [selected]="employmentType.id === employee.employmentType.id">{{employmentType.type}}</option>
+            </select>
+        </div>
+    </form>
+
+    <div style="margin-top: 30px;">
+        <div style="display: flex; justify-content: end;"><button type="button" class="btn btn-primary" (click)="AddEmployee(employee)">Add Employee</button></div>
+    </div>
+</div>
